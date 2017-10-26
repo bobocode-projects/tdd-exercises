@@ -4,7 +4,7 @@
  ### - practice with *TDD* discipline
  
 **Binary Search Tree (BST)** is an ordered (sorted) binary tree. You job is to implement the interface `BinarySearchTree`
- as it is done in `BinarySearchTreeImpl.java`. The first part of the exercise:
+ as it is done in `BinarySearchTreeImpl.java`. The exercise consists of two parts:
  1. Drop implementation, and create an empty one. Implement methods until you have all tests passed
  2. Drop implementation and tests. Implement `BinarySearchTree` using TDD discipline
  
