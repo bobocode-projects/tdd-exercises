@@ -1,4 +1,4 @@
-#Binary Search Tree with TDD - 2 in 1
+# Binary Search Tree with TDD - 2 in 1
 
  ### - improve *Java* skills implementing BST 
  ### - practice with *TDD* discipline
