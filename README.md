@@ -1,10 +1,11 @@
-# Improve your programming skills
-### No pain, No gain! A list of training exercises for Java programmers
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>TDD exercises
+The list of exercises dedicated to training your Test-driven development (TDD) skills
+
+### No pain, No gain!
 
 > Skill is only developed by hours and hours and hours of beating on your craft
 
-When working on real problems (tickets) you are focused on finding solutions. On the other hand, when you are learning new 
- things, you try to understand how it works. That's why it is important to have a different type of activities, when you 
-  are focused on improving your skills.
-
-**Programming exercise** is a predefined task that you repeatedly implement to improve a certain skill. 
+* Working on real problems, you're focused on finding a solution
+* Learning new things, you're trying to understand how it works
+ 
+It is important to have a different type of activities, which purpose is improving your skill. **An exercise** is a predefined task that you continuously implement to improve a certain skill
