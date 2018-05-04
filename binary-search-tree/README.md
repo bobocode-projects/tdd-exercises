@@ -11,7 +11,7 @@ You're supposed to be familiar with Java, TDD, Binary search tree, and recursion
 ### How to start :question:
 * Just clone the repository and start implementing `BinarySearchTree` interface following *three laws of TDD*
 * If you don't have enough knowladge about this domain, check out the [links below](#related-materials-information_source)
-* Don't worry if you got stuck, checkout the [complete]() branch and see the final implementation
+* Don't worry if you got stuck, checkout the [exercise/completed](https://github.com/bobocode-projects/tdd-exercises/tree/exercise/completed/binary-search-tree) branch and see the final implementation
  
 ### Related materials :information_source:
  * [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
