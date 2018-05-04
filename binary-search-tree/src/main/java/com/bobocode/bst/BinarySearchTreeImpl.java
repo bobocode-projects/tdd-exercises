@@ -17,7 +17,7 @@ public class BinarySearchTreeImpl<T extends Comparable> implements BinarySearchT
     }
 
     private boolean insertToRoot(T element) {
-        root = new Node<>(element);
+        root = Node.valueOf(element);
         counter++;
         return true;
     }
@@ -32,21 +32,29 @@ public class BinarySearchTreeImpl<T extends Comparable> implements BinarySearchT
 
     private boolean insert(Node<T> node, T element) {
         if (node.getElement().compareTo(element) > 0) {
-            if (node.getLeft() != null) {
-                return insert(node.getLeft(), element);
-            } else {
-                node.setLeft(new Node<>(element));
-                return true;
-            }
+            return insertIntoLeft(node, element);
         } else if (node.getElement().compareTo(element) < 0) {
-            if (node.getRight() != null) {
-                return insert(node.getRight(), element);
-            } else {
-                node.setRight(new Node<>(element));
-                return true;
-            }
+            return insertIntoRight(node, element);
         } else {
             return false;
+        }
+    }
+
+    private boolean insertIntoLeft(Node<T> node, T element){
+        if (node.getLeft() != null) {
+            return insert(node.getLeft(), element);
+        } else {
+            node.setLeft(Node.valueOf(element));
+            return true;
+        }
+    }
+
+    private boolean insertIntoRight(Node<T> node, T element){
+        if (node.getRight() != null) {
+            return insert(node.getRight(), element);
+        } else {
+            node.setRight(Node.valueOf(element));
+            return true;
         }
     }
 
@@ -113,38 +121,6 @@ public class BinarySearchTreeImpl<T extends Comparable> implements BinarySearchT
         }
     }
 
-    class Node<T extends Comparable> {
-        private T element;
-        Node<T> left;
-        Node<T> right;
 
-        public Node(T element) {
-            this.element = element;
-        }
-
-        public T getElement() {
-            return element;
-        }
-
-        public void setElement(T element) {
-            this.element = element;
-        }
-
-        public Node<T> getLeft() {
-            return left;
-        }
-
-        public void setLeft(Node<T> left) {
-            this.left = left;
-        }
-
-        public Node<T> getRight() {
-            return right;
-        }
-
-        public void setRight(Node<T> right) {
-            this.right = right;
-        }
-    }
 
 }

@@ -14,38 +14,83 @@ public class BinarySearchTreeTest {
     private BinarySearchTree<Integer> intTree = new BinarySearchTreeImpl<>();
 
     @Test
-    public void testSizeOnEmptyTree() {
-        int treeSize = intTree.size();
+    public void testSizeOfEmptyTree() {
+        int actualTreeSize = intTree.size();
 
-        assertEquals(treeSize, 0);
+        assertEquals(0, actualTreeSize);
+    }
+
+    @Test
+    public void testSizeOfOneElementTree() {
+        intTree.insert(12);
+
+        int actualTreeSize = intTree.size();
+
+        assertEquals(1, actualTreeSize);
     }
 
     @Test
     public void testHeightOfEmptyTree() {
-        int height = intTree.height();
+        int actualHeight = intTree.height();
 
-        assertEquals(0, height);
+        assertEquals(0, actualHeight);
     }
 
     @Test
     public void testHeightOfOneElementTree() {
         intTree.insert(34);
 
-        int height = intTree.height();
+        int actualHeight = intTree.height();
 
-        assertEquals(1, height);
+        assertEquals(1, actualHeight);
     }
 
+    /** An example of balanced tree
+     *         45
+     *      /     \
+     *    26       61
+     *   / \      /  \
+     * 11  32    54  80
+     */
     @Test
-    public void testHeight() {
-        intTree.insert(2);
-        intTree.insert(1);
-        intTree.insert(3);
-        intTree.insert(4);
+    public void testHeightOfBalancedTree() {
+        intTree.insert(45);
+        intTree.insert(26);
+        intTree.insert(61);
+        intTree.insert(11);
+        intTree.insert(32);
+        intTree.insert(54);
+        intTree.insert(80);
+
 
         int height = intTree.height();
 
         assertEquals(3, height);
+    }
+
+    /** An example of a liked list tree
+     *  1
+     *   \
+     *    2
+     *     \
+     *      3
+     *       \
+     *        4
+     *         \
+     *          5
+     */
+    @Test
+    public void testHeightOfLinkedListTree() {
+        intTree.insert(1);
+        intTree.insert(2);
+        intTree.insert(3);
+        intTree.insert(4);
+        intTree.insert(5);
+
+
+        int height = intTree.height();
+
+        assertEquals(5, height);
     }
 
     @Test
@@ -56,12 +101,29 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testInsertSameElementTwoTimes() {
+    public void testInsertSameElementTwoTimesIntoEmptyTree() {
         boolean isAddedFirstTime = intTree.insert(25);
+        int treeSizeAfterFirstInsert = intTree.size();
         boolean isAddedSecondTime = intTree.insert(25);
+        int treeSizeAfterSecondInsert = intTree.size();
 
         assertTrue(isAddedFirstTime);
         assertFalse(isAddedSecondTime);
+        assertEquals(treeSizeAfterFirstInsert, treeSizeAfterSecondInsert);
+    }
+
+    @Test
+    public void testInsertSameElementTwoTimesIntoNonEmptyTree() {
+        intTree.insert(24);
+        intTree.insert(45);
+        intTree.insert(14);
+        int initialTreeSize = intTree.size();
+
+        boolean isAddedSecondTime = intTree.insert(24);
+        int treeSizeAfterSecondInsert = intTree.size();
+
+        assertFalse(isAddedSecondTime);
+        assertEquals(initialTreeSize, treeSizeAfterSecondInsert);
     }
 
     @Test
