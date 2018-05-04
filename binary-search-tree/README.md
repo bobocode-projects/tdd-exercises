@@ -1,14 +1,19 @@
-# Binary Search Tree with TDD - 2 in 1
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Binary Search Tree exercise :muscle:
+Improve your TDD skill implementing Binary Search Tree
 
- ### - improve *Java* skills implementing BST 
- ### - practice with *TDD* discipline
- 
+### Task
 **Binary Search Tree (BST)** is an ordered (sorted) binary tree. You job is to implement the interface `BinarySearchTree`
- as it is done in `BinarySearchTreeImpl.java`. The exercise consists of two parts:
- 1. Drop implementation, and create an empty one. Implement methods until you have all tests passed
- 2. Drop implementation and tests. Implement `BinarySearchTree` using TDD discipline
+ by practicine TDD discipline
  
- #### Links:
+### Pre-conditions :heavy_exclamation_mark:
+You're supposed to be familiar with Java, TDD, Binary search tree, and recursion
+
+### How to start :question:
+* Just clone the repository and start implementing `BinarySearchTree` interface following *three laws of TDD*
+* If you don't have enough knowladge about this domain, check out the [links below](#related-materials-information_source)
+* Don't worry if you got stuck, checkout the [complete]() branch and see the final implementation
+ 
+### Related materials :information_source:
  * [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
  * [The Three Laws of TDD](https://www.youtube.com/watch?v=qkblc5WRn-U&t=3476s)
 
