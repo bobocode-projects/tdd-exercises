@@ -11,5 +11,13 @@ It is important to have a different type of activities, which purpose is improvi
 ***An exercise** is a predefined task that you continuously implement to improve a certain skill* :muscle:
 
 ##
+### The three laws of TDD
+1. You should not write production code until you have written a failing unit test
+2. You should not write more of a unit test than is sufficient to fail (because of compilation errors)
+3. You should not write more production code than is sufficient to pass the failing test
+##
+ 
 
 * [Binary Search Tree exercise](https://github.com/bobocode-projects/tdd-exercises/tree/master/binary-search-tree)
+
+
