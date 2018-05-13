@@ -97,6 +97,16 @@ public class BinarySearchTreeTest {
         assertThat(actualHeight, is(0));
     }
 
+    @Test
+    public void testHeightOfOneElementTree() {
+        BinarySearchTree<Integer> bst = new RecursiveBinarySearchTree<>();
+        bst.insert(24);
+
+        int actualHeight = bst.height();
+
+        assertThat(actualHeight, is(0));
+    }
+
     /**
      * .......10
      * ....../  \
@@ -115,7 +125,7 @@ public class BinarySearchTreeTest {
 
         int actualHeight = bst.height();
 
-        assertThat(actualHeight, is(3));
+        assertThat(actualHeight, is(2));
     }
 
     /**
@@ -140,7 +150,7 @@ public class BinarySearchTreeTest {
 
         int actualHeight = bst.height();
 
-        assertThat(actualHeight, is(5));
+        assertThat(actualHeight, is(4));
     }
 
     @Test
@@ -150,7 +160,7 @@ public class BinarySearchTreeTest {
 
         int actualHeight = bst.height();
 
-        assertThat(actualHeight, is(1));
+        assertThat(actualHeight, is(0));
     }
 
     @Test

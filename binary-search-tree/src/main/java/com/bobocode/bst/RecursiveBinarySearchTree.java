@@ -78,7 +78,7 @@ public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySe
 
     @Override
     public int height() {
-        return root != null ? height(root) : 0;
+        return root != null ? height(root) - 1 : 0;
     }
 
     private int height(Node<T> node) {
