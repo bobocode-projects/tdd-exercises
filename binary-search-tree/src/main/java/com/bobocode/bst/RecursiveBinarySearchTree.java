@@ -1,11 +1,18 @@
 package com.bobocode.bst;
 
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySearchTree<T> {
 
     private Node<T> root;
     private int size = 0;
+
+    public static <T extends Comparable> RecursiveBinarySearchTree<T> of(T... elements){
+        RecursiveBinarySearchTree<T> bst = new RecursiveBinarySearchTree<>();
+        Stream.of(elements).forEach(bst::insert);
+        return bst;
+    }
 
     @Override
     public boolean insert(T element) {
