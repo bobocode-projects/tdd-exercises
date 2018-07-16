@@ -3,7 +3,7 @@ Improve your TDD skill implementing Binary Search Tree
 
 ### Task
 **Binary Search Tree (BST)** is an ordered (sorted) binary tree. You job is to implement the interface `BinarySearchTree`
- by practicine TDD discipline
+ by practicing TDD discipline
  
 ### Pre-conditions :heavy_exclamation_mark:
 You're supposed to be familiar with Java, TDD, Binary search tree, and recursion
