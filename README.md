@@ -18,6 +18,8 @@ It is important to have a different type of activities, which purpose is improvi
 ##
  
 
-* [Binary Search Tree exercise](https://github.com/bobocode-projects/tdd-exercises/tree/master/binary-search-tree)
+* [Binary Search Tree](https://github.com/bobocode-projects/tdd-exercises/tree/master/binary-search-tree)
+* [Stack](https://github.com/bobocode-projects/tdd-exercises/tree/master/stack)
+* [Linked List](https://github.com/bobocode-projects/tdd-exercises/tree/master/linked-list)
 
 
