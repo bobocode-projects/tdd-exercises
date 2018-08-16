@@ -12,6 +12,7 @@
     <modules>
         <module>binary-search-tree</module>
         <module>stack</module>
+        <module>linked-list</module>
     </modules>
 
     <properties>

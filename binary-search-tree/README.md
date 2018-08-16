@@ -6,7 +6,8 @@ Improve your TDD skill implementing Binary Search Tree
  by practicing TDD discipline
  
 ### Pre-conditions :heavy_exclamation_mark:
-You're supposed to be familiar with Java, TDD, Binary search tree, and recursion
+You're supposed to know [The Three laws of TDD](https://github.com/bobocode-projects/tdd-exercises#the-three-laws-of-tdd),
+ be familiar with Java, TDD, Binary search tree, and recursion
 
 ### How to start :question:
 * Just clone the repository and start implementing `BinarySearchTree` interface following *three laws of TDD*

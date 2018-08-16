@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Binary Search Tree exercise :muscle:
+# <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>Stack exercise :muscle:
 Improve your TDD skill implementing Stack
 
 ### Task
@@ -6,7 +6,8 @@ Improve your TDD skill implementing Stack
  using TDD discipline
  
 ### Pre-conditions :heavy_exclamation_mark:
-You're supposed to be familiar with data structures in JDK, and be able to write Java code
+You're supposed to know [The Three laws of TDD](https://github.com/bobocode-projects/tdd-exercises#the-three-laws-of-tdd),
+  be familiar with Stack data structure, and be able to write Java code
 
 ### How to start :question:
 * Just clone the repository and start implementing `Stack` interface following *three laws of TDD*
