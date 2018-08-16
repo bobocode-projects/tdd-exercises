@@ -8,6 +8,12 @@ package com.bobocode;
  */
 public class LinkedList<E> implements List<E> {
 
+    private E element;
+
+    public LinkedList() {
+        this.element = null;
+    }
+
     /**
      * This method creates a list of provided elements
      *
@@ -26,7 +32,7 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public void add(E element) {
-        throw new UnsupportedOperationException("This method is not implemented yet"); // todo: implement this method
+        this.element = element;
     }
 
     /**
