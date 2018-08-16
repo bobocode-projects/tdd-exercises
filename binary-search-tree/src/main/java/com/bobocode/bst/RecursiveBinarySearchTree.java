@@ -1,14 +1,28 @@
 package com.bobocode.bst;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySearchTree<T> {
+    private static class Node<T> {
+        T element;
+        Node<T> left;
+        Node<T> right;
+
+        private Node(T element) {
+            this.element = element;
+        }
+
+        public static <T> Node valueOf(T element) {
+            return new Node(element);
+        }
+    }
 
     private Node<T> root;
     private int size = 0;
 
-    public static <T extends Comparable> RecursiveBinarySearchTree<T> of(T... elements){
+    public static <T extends Comparable> RecursiveBinarySearchTree<T> of(T... elements) {
         RecursiveBinarySearchTree<T> bst = new RecursiveBinarySearchTree<>();
         Stream.of(elements).forEach(bst::insert);
         return bst;
@@ -16,6 +30,7 @@ public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySe
 
     @Override
     public boolean insert(T element) {
+        Objects.requireNonNull(element);
         boolean isInserted = insertElement(element);
         if (isInserted) {
             size++;
@@ -28,34 +43,34 @@ public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySe
             root = Node.valueOf(element);
             return true;
         } else {
-            return insertIntoNode(root, element);
+            return insertIntoSubTree(root, element);
         }
     }
 
-    private boolean insertIntoNode(Node<T> node, T element) {
-        if (node.getElement().compareTo(element) > 0) {
-            return insertIntoLeftSubtree(node, element);
-        } else if (node.getElement().compareTo(element) < 0) {
-            return insertIntoRightSubtree(node, element);
+    private boolean insertIntoSubTree(Node<T> subTreeRoot, T element) {
+        if (subTreeRoot.element.compareTo(element) > 0) {
+            return insertIntoLeftSubtree(subTreeRoot, element);
+        } else if (subTreeRoot.element.compareTo(element) < 0) {
+            return insertIntoRightSubtree(subTreeRoot, element);
         } else {
             return false;
         }
     }
 
     private boolean insertIntoLeftSubtree(Node<T> node, T element) {
-        if (node.getLeft() != null) {
-            return insertIntoNode(node.getLeft(), element);
+        if (node.left != null) {
+            return insertIntoSubTree(node.left, element);
         } else {
-            node.setLeft(Node.valueOf(element));
+            node.left = Node.valueOf(element);
             return true;
         }
     }
 
     private boolean insertIntoRightSubtree(Node<T> node, T element) {
-        if (node.getRight() != null) {
-            return insertIntoNode(node.getRight(), element);
+        if (node.right != null) {
+            return insertIntoSubTree(node.right, element);
         } else {
-            node.setRight(Node.valueOf(element));
+            node.right = Node.valueOf(element);
             return true;
         }
     }
@@ -63,16 +78,17 @@ public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySe
 
     @Override
     public boolean search(T element) {
-        return findByElement(root, element) != null;
+        Objects.requireNonNull(element);
+        return findChildNodeByElement(root, element) != null;
     }
 
-    private Node<T> findByElement(Node<T> node, T element) {
+    private Node<T> findChildNodeByElement(Node<T> node, T element) {
         if (node == null) {
             return null;
-        } else if (node.getElement().compareTo(element) > 0) {
-            return findByElement(node.getLeft(), element);
-        } else if (node.getElement().compareTo(element) < 0) {
-            return findByElement(node.getRight(), element);
+        } else if (node.element.compareTo(element) > 0) {
+            return findChildNodeByElement(node.left, element);
+        } else if (node.element.compareTo(element) < 0) {
+            return findChildNodeByElement(node.right, element);
         } else {
             return node;
         }
@@ -92,7 +108,7 @@ public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySe
         if (node == null) {
             return 0;
         } else {
-            return 1 + Math.max(height(node.getLeft()), height(node.getRight()));
+            return 1 + Math.max(height(node.left), height(node.right));
         }
     }
 
@@ -103,9 +119,9 @@ public class RecursiveBinarySearchTree<T extends Comparable> implements BinarySe
 
     private void inOrderTraversal(Node<T> node, Consumer<T> consumer) {
         if (node != null) {
-            inOrderTraversal(node.getLeft(), consumer);
-            consumer.accept(node.getElement());
-            inOrderTraversal(node.getRight(), consumer);
+            inOrderTraversal(node.left, consumer);
+            consumer.accept(node.element);
+            inOrderTraversal(node.right, consumer);
         }
     }
 }

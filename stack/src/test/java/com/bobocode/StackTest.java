@@ -13,23 +13,21 @@ import static org.junit.Assert.assertTrue;
 @RunWith(JUnit4.class)
 public class StackTest {
 
+    private Stack<Integer> intStack = new NodeStack<>();
+
     @Test
     public void testPushElementOntoEmptyStack() {
-        Stack<Integer> intStack = new NodeStack<>();
-
         intStack.push(234);
     }
 
     @Test(expected = EmptyStackException.class)
     public void testPopElementFromEmptyStack() {
-        Stack<Integer> intStack = new NodeStack<>();
-
         intStack.pop();
     }
 
     @Test
     public void testPushElements() {
-        Stack<Integer> intStack = NodeStack.of(23, 35, 72);
+        intStack = NodeStack.of(23, 35, 72);
 
         intStack.push(55);
 
@@ -38,7 +36,7 @@ public class StackTest {
 
     @Test
     public void testPopElements() {
-        Stack<Integer> intStack = NodeStack.of(87, 53, 66);
+        intStack = NodeStack.of(87, 53, 66);
 
         intStack.pop();
         intStack.push(234);
@@ -49,7 +47,7 @@ public class StackTest {
 
     @Test
     public void testSize(){
-        Stack<Integer> intStack = NodeStack.of(87, 53, 66);
+        intStack = NodeStack.of(87, 53, 66);
 
         int actualSize = intStack.size();
 
@@ -58,8 +56,6 @@ public class StackTest {
 
     @Test
     public void testSizeOnEmptyStack(){
-        Stack<Integer> intStack = new NodeStack<>();
-
         int actualSize = intStack.size();
 
         assertThat(actualSize, is(0));
@@ -67,7 +63,7 @@ public class StackTest {
 
     @Test
     public void testIsEmpty(){
-        Stack<Integer> intStack = NodeStack.of(87, 53, 66);
+        intStack = NodeStack.of(87, 53, 66);
 
         boolean stackEmpty = intStack.isEmpty();
 
@@ -76,8 +72,6 @@ public class StackTest {
 
     @Test
     public void testIsEmptyOnEmptyStack(){
-        Stack<Integer> intStack = new NodeStack<>();
-
         boolean stackEmpty = intStack.isEmpty();
 
         assertThat(stackEmpty, is(true));

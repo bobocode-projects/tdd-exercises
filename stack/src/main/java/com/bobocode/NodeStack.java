@@ -2,11 +2,25 @@ package com.bobocode;
 
 import com.bobocode.exception.EmptyStackException;
 
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class NodeStack<T> implements Stack<T> {
+    private static class Node<T> {
+        T element;
+        Node<T> next;
+
+        public static <T> Node<T> valueOf(T element) {
+            return new Node<>(element);
+        }
+
+        private Node(T element) {
+            this.element = element;
+        }
+    }
+
     private Node<T> head;
-    private int size=0;
+    private int size = 0;
 
     public static <T> NodeStack<T> of(T... elements) {
         NodeStack<T> nodeStack = new NodeStack<>();
@@ -16,9 +30,10 @@ public class NodeStack<T> implements Stack<T> {
 
     @Override
     public void push(T element) {
+        Objects.requireNonNull(element);
         Node<T> newNode = Node.valueOf(element);
         if (head != null) {
-            newNode.setNext(head);
+            newNode.next = head;
         }
         head = newNode;
         size++;
@@ -26,17 +41,17 @@ public class NodeStack<T> implements Stack<T> {
 
     @Override
     public T pop() {
-        if (!isEmpty()) {
+        if (head != null) {
             size--;
-            return popHead();
+            return retrieveHead();
         } else {
             throw new EmptyStackException();
         }
     }
 
-    private T popHead() {
-        T element = head.getElement();
-        this.head = head.getNext();
+    private T retrieveHead() {
+        T element = head.element;
+        this.head = head.next;
         return element;
     }
 
