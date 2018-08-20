@@ -32,8 +32,7 @@ public class StackTest {
 
     @Test
     public void validateSizeDeletingMethod() {
-        stack.push(12);
-        stack.push(14);
+        stack = OwnStack.valueOf(12, 14);
         stack.pop();
 
         assertThat("Size method is wrong", stack.size(), equalTo(1));
@@ -49,12 +48,19 @@ public class StackTest {
 
     @Test
     public void validatePushWithManyAddingMethod() {
-        stack.push(12);
-        stack.push(14);
-        stack.push(16);
+        stack = OwnStack.valueOf(12, 14, 16);
 
         Integer element = stack.pop();
         assertThat("Wrong number", element, equalTo(16));
+    }
+
+    @Test
+    public void validatePopWithManyAddingMethod() {
+        stack = OwnStack.valueOf(12, 14, 16);
+
+        stack.pop();
+        Integer element = stack.pop();
+        assertThat("Wrong number", element, equalTo(14));
     }
 
     @Test(expected = EmptyStackException.class)
@@ -64,8 +70,7 @@ public class StackTest {
 
     @Test(expected = EmptyStackException.class)
     public void validatePopWithNotEmptyStack() {
-        stack.push(12);
-        stack.push(10);
+        stack = OwnStack.valueOf(12, 14);
         stack.pop();
         stack.pop();
         stack.pop();
@@ -89,6 +94,12 @@ public class StackTest {
 
         assertThat("Stack should not be empty", !stack.isEmpty());
         assertThat("Size for pushed null values should be 0", stack.size(), equalTo(2));
+    }
+
+    @Test
+    public void validateEmptyStack() {
+        assertThat("Stack should be empty", stack.isEmpty());
+        assertThat("Size of empty stack should be 0", stack.size(), equalTo(0));
     }
 
 }

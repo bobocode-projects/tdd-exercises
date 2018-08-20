@@ -2,6 +2,7 @@ package com.bobocode;
 
 import java.util.EmptyStackException;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class OwnStack<T> implements Stack<T> {
     private static class Node<T> {
@@ -58,5 +59,11 @@ public class OwnStack<T> implements Stack<T> {
     @Override
     public boolean isEmpty() {
         return head == null;
+    }
+
+    public static <T> OwnStack<T> valueOf(T... elements) {
+        OwnStack<T> stack = new OwnStack<>();
+        Stream.of(elements).forEach(stack::push);
+        return stack;
     }
 }
