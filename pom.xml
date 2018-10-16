@@ -13,6 +13,7 @@
         <module>binary-search-tree</module>
         <module>stack</module>
         <module>linked-list</module>
+        <module>avl-tree</module>
     </modules>
 
     <properties>
