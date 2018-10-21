@@ -60,11 +60,11 @@ public class LinkedList<E> implements List<E> {
     }
 
     private Node<E> findTail() {
-        Node<E> followingNode = Objects.requireNonNull(head);
-        while (followingNode.next != null) {
-            followingNode = followingNode.next;
+        Node<E> currentNode = Objects.requireNonNull(head);
+        while (currentNode.next != null) {
+            currentNode = currentNode.next;
         }
-        return followingNode;
+        return currentNode;
     }
 
     /**
@@ -205,10 +205,6 @@ public class LinkedList<E> implements List<E> {
         if (head == null) {
             return false;
         }
-        return LookForElement(element);
-    }
-
-    private boolean LookForElement(E element) {
         Node<E> currentNode = head;
         while (currentNode.next != null) {
             if (currentNode.element == element) {
@@ -217,7 +213,6 @@ public class LinkedList<E> implements List<E> {
             currentNode = currentNode.next;
         }
         return false;
-
     }
 
     /**
@@ -227,7 +222,7 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public boolean isEmpty() {
-        return size ==0;
+        return size == 0;
     }
 
     /**
@@ -245,7 +240,7 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public void clear() {
-        head=null;
-        size=0;
+        head = null;
+        size = 0;
     }
 }
