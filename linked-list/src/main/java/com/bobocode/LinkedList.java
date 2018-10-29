@@ -69,6 +69,7 @@ public class LinkedList<E> implements List<E> {
      * Returns the first element of the list. Operation is performed in constant time O(1)
      *
      * @return the first element of the list
+     * @throws java.util.NoSuchElementException if list is empty
      */
     @Override
     public E getFirst() {
@@ -80,6 +81,7 @@ public class LinkedList<E> implements List<E> {
      * Returns the last element of the list. Operation is performed in constant time O(1)
      *
      * @return the last element of the list
+     * @throws java.util.NoSuchElementException if list is empty
      */
     @Override
     public E getLast() {
