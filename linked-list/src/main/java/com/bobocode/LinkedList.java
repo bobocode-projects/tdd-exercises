@@ -1,5 +1,7 @@
 package com.bobocode;
 
+
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -10,22 +12,9 @@ import java.util.stream.Stream;
  * @param <E> generic type parameter
  */
 public class LinkedList<E> implements List<E> {
-
     private Node<E> head;
+    private Node<E> tail;
     private int size;
-
-    final static class Node<E> {
-        E element;
-        Node<E> next;
-
-        private Node(E element) {
-            this.element = element;
-        }
-
-        static <E> Node<E> valueOf(E element) {
-            return new Node<>(element);
-        }
-    }
 
     /**
      * This method creates a list of provided elements
@@ -35,7 +24,7 @@ public class LinkedList<E> implements List<E> {
      * @return a new list of elements the were passed as method parameters
      */
     public static <E> List<E> of(E... elements) {
-        List<E> linkedList = new LinkedList<>();
+        LinkedList<E> linkedList = new LinkedList<>();
         Stream.of(elements).forEach(linkedList::add);
         return linkedList;
     }
@@ -47,24 +36,7 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public void add(E element) {
-        Objects.requireNonNull(element);
-        Node<E> newNode = Node.valueOf(element);
-        if (head == null) {
-            head = newNode;
-        } else {
-            Node<E> tail = findTail();
-            tail.next = newNode;
-        }
-
-        size++;
-    }
-
-    private Node<E> findTail() {
-        Node<E> currentNode = Objects.requireNonNull(head);
-        while (currentNode.next != null) {
-            currentNode = currentNode.next;
-        }
-        return currentNode;
+        add(size, element);
     }
 
     /**
@@ -76,37 +48,46 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public void add(int index, E element) {
-        if (index == size) {
-            this.add(element);
-        } else {
-            addInside(index, element);
-        }
-    }
-
-    private void addInside(int index, E element) {
         Node<E> newNode = Node.valueOf(element);
         if (index == 0) {
-            addInsideAsNewHead(newNode);
+            addAsHead(newNode);
+        } else if (index == size) {
+            addAsTail(newNode);
         } else {
-            addInsideByIndex(index, newNode);
+            add(index, newNode);
         }
         size++;
     }
 
-    private void addInsideAsNewHead(Node<E> newNode) {
+    private void addAsHead(Node<E> newNode) {
         newNode.next = head;
         head = newNode;
+        if (head.next == null) {
+            tail = head;
+        }
     }
 
-    private void addInsideByIndex(int index, Node<E> newNode) {
-        checkIfIndexInBounds(index);
-        Node<E> precedingNode = findNodeAt(index - 1);
-
-        newNode.next = precedingNode.next;
-        precedingNode.next = newNode;
+    private void addAsTail(Node<E> newNode) {
+        tail.next = newNode;
+        tail = newNode;
     }
 
-    private Node<E> findNodeAt(int index) {
+    private void add(int index, Node<E> newNode) {
+        Node<E> node = findNodeByIndex(index - 1);
+        newNode.next = node.next;
+        node.next = newNode;
+    }
+
+    private Node<E> findNodeByIndex(int index) {
+        Objects.checkIndex(index, size);
+        if (index == size - 1) {
+            return tail;
+        } else {
+            return nodeAt(index);
+        }
+    }
+
+    private Node<E> nodeAt(int index) {
         Node<E> currentNode = head;
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
@@ -123,12 +104,8 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public void set(int index, E element) {
-        checkIfIndexInBounds(index);
-        Node<E> precedingNode = findNodeAt(index - 1);
-        Node<E> newNode = Node.valueOf(element);
-
-        newNode.next = precedingNode.next.next;
-        precedingNode.next = newNode;
+        Node<E> node = findNodeByIndex(index);
+        node.value = element;
     }
 
     /**
@@ -140,39 +117,38 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public E get(int index) {
-        checkIfIndexInBounds(index);
-        Node<E> currentNode = head;
-        for (int i = 0; i < index; i++) {
-            currentNode = currentNode.next;
-        }
-        return currentNode.element;
+        Node<E> node = findNodeByIndex(index);
+        return node.value;
     }
-
-    private void checkIfIndexInBounds(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
-    }
-
 
     /**
      * Returns the first element of the list. Operation is performed in constant time O(1)
      *
      * @return the first element of the list
+     * @throws java.util.NoSuchElementException if list is empty
      */
     @Override
     public E getFirst() {
-        return findNodeAt(0).element;
+        checkElementsExist();
+        return head.value;
     }
 
     /**
      * Returns the last element of the list. Operation is performed in constant time O(1)
      *
      * @return the last element of the list
+     * @throws java.util.NoSuchElementException if list is empty
      */
     @Override
     public E getLast() {
-        return findNodeAt(size - 1).element;
+        checkElementsExist();
+        return tail.value;
+    }
+
+    private void checkElementsExist() {
+        if (head == null) {
+            throw new NoSuchElementException();
+        }
     }
 
     /**
@@ -185,15 +161,24 @@ public class LinkedList<E> implements List<E> {
     @Override
     public void remove(int index) {
         if (index == 0) {
-            head = head.next;
+            Objects.checkIndex(index, size);
+            removeHead();
         } else {
-            checkIfIndexInBounds(index);
-            Node<E> precedingNode = findNodeAt(index - 1);
-            precedingNode.next = precedingNode.next.next;
+            Node<E> previousNode = findNodeByIndex(index - 1);
+            previousNode.next = previousNode.next.next;
+            if (index == size - 1) {
+                tail = previousNode;
+            }
         }
         size--;
     }
 
+    private void removeHead() {
+        head = head.next;
+        if (head == null) {
+            tail = null;
+        }
+    }
 
     /**
      * Checks if a specific exists in he list
@@ -202,12 +187,9 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public boolean contains(E element) {
-        if (head == null) {
-            return false;
-        }
         Node<E> currentNode = head;
-        while (currentNode.next != null) {
-            if (currentNode.element == element) {
+        while (currentNode != null) {
+            if (currentNode.value.equals(element)) {
                 return true;
             }
             currentNode = currentNode.next;
@@ -222,7 +204,7 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return head == null;
     }
 
     /**
@@ -240,7 +222,20 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public void clear() {
-        head = null;
+        head = tail = null;
         size = 0;
+    }
+
+    static class Node<E> {
+        private E value;
+        private Node<E> next;
+
+        private Node(E value) {
+            this.value = value;
+        }
+
+        public static <T> Node<T> valueOf(T value) {
+            return new Node<>(value);
+        }
     }
 }
