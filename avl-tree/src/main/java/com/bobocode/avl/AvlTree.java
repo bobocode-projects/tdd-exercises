@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 
 /**
  * AVL tree should have an API that allow provides the following functionality:
- * - insert an element and return true if it was inserted successfully
+ * - insert an element, self-rebalance and return true if it was inserted successfully
  * - search an element and return true it element exists
  * - get tree size
  * - get tree height
