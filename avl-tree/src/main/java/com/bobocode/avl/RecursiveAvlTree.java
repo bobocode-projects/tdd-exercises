@@ -12,7 +12,6 @@ public class RecursiveAvlTree<T extends Comparable> implements AvlTree<T> {
     static class Node<T> {
         T element;
         Node<T> left, right, parent;
-        int height;
 
         private Node(T element) {
             this.element = element;
@@ -74,18 +73,9 @@ public class RecursiveAvlTree<T extends Comparable> implements AvlTree<T> {
         }
     }
 
-    public int balanceFactorAt(Node<T> theNode) {
-        if (theNode == null) {
-            return 0;
-        } else {
-            return height(theNode.right) - height(theNode.left);
-        }
-    }
-
     private boolean insertIntoLeftSubTree(Node<T> theNode, T element) {
         if (theNode.left != null) {
             return insertIntoSubTree(theNode.left, element);
-            //check balance factor for rebalancing
         } else {
             Node<T> newNode = Node.valueOf(element);
             newNode.parent = theNode;
@@ -102,7 +92,6 @@ public class RecursiveAvlTree<T extends Comparable> implements AvlTree<T> {
             Node<T> newNode = Node.valueOf(element);
             newNode.parent = theNode;
             theNode.right = newNode;
-            //check balance factor for rebalancing
             size++;
             return true;
         }
@@ -120,7 +109,16 @@ public class RecursiveAvlTree<T extends Comparable> implements AvlTree<T> {
             leftRotateAt(theNode);
         }
         if (balanceFactorAt(theNode) < -1 && theNode.left.element.compareTo(element) < 0) {
-//            rightRotateAt(theNode);
+            leftRotateIWithRightParentAt(theNode.left);
+            rightRotateAt(theNode);
+        }
+    }
+
+    public int balanceFactorAt(Node<T> theNode) {
+        if (theNode == null) {
+            return 0;
+        } else {
+            return height(theNode.right) - height(theNode.left);
         }
     }
 
@@ -136,7 +134,6 @@ public class RecursiveAvlTree<T extends Comparable> implements AvlTree<T> {
         } else {
             root = leftChild;
             leftChild.parent = null;
-            targetNode.left = null;
         }
 
     }
@@ -153,7 +150,6 @@ public class RecursiveAvlTree<T extends Comparable> implements AvlTree<T> {
         } else {
             root = rightChild;
             rightChild.parent = null;
-            targetNode.right = null;
         }
     }
 
@@ -198,14 +194,16 @@ public class RecursiveAvlTree<T extends Comparable> implements AvlTree<T> {
     }
 
     @Override
-    public int size() {
+    public int getSize() {
         return size;
     }
 
     @Override
-    public int height() {
+    public int getHeight() {
         return root != null ? height(root) - 1 : 0;
     }
+
+
 
     int height(Node<T> node) {
         if (node == null) {
@@ -216,16 +214,41 @@ public class RecursiveAvlTree<T extends Comparable> implements AvlTree<T> {
     }
 
     @Override
-    public void traverse(Consumer<T> consumer) {
-        inOrderTraversal(root, consumer);
+    public void makePreOrderTraversal(Consumer<T> consumer) {
+        makePreOrderTraversal(root, consumer);
     }
 
-    private void inOrderTraversal(Node<T> node, Consumer<T> consumer) {
+    public void makePreOrderTraversal(Node<T> node, Consumer<T> consumer) {
         if (node != null) {
-            inOrderTraversal(node.left, consumer);
             consumer.accept(node.element);
-            inOrderTraversal(node.right, consumer);
+            makePreOrderTraversal(node.left, consumer);
+            makePreOrderTraversal(node.right, consumer);
         }
     }
 
+    @Override
+    public void makeInOrderTraversal(Consumer<T> consumer) {
+        makeInOrderTraversal(root, consumer);
+    }
+
+    public void makeInOrderTraversal(Node<T> node, Consumer<T> consumer) {
+        if (node != null) {
+            makeInOrderTraversal(node.left, consumer);
+            consumer.accept(node.element);
+            makeInOrderTraversal(node.right, consumer);
+        }
+    }
+
+    @Override
+    public void makePostOrderTraversal(Consumer<T> consumer) {
+        makePostOrderTraversal(root, consumer);
+    }
+
+    public void makePostOrderTraversal(Node<T> node, Consumer<T> consumer) {
+        if (node != null) {
+            makePostOrderTraversal(node.left, consumer);
+            makePostOrderTraversal(node.right, consumer);
+            consumer.accept(node.element);
+        }
+    }
 }
