@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.NoSuchElementException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -76,7 +78,6 @@ public class LinkedListTest {
     @Test
     public void addByIndexWhenIndexEqualsSizeInsertsElementToTail() {
         intList = LinkedList.of(1, 2, 3);
-        ;
         intList.add(3, 4);
         assertEquals(Integer.valueOf(4), intList.getLast());
         assertEquals(4, intList.size());
@@ -100,20 +101,19 @@ public class LinkedListTest {
         assertFalse(intList.isEmpty());
     }
 
-    @Test
+    @Test (expected = NoSuchElementException.class)
     public void getFirstWhenListInEmptyReturnsNull() {
-        assertNull(intList.getFirst());
+        intList.getFirst();
     }
 
-    @Test
+    @Test (expected = NoSuchElementException.class)
     public void getLastWhenListInEmptyReturnsNull() {
-        assertNull(intList.getFirst());
+        intList.getLast();
     }
 
     @Test
     public void getByIndexReturnsElemenOnIndexPosition() {
         intList = LinkedList.of(1, 2, 3);
-        ;
         Integer actual = intList.get(1);
         assertEquals(Integer.valueOf(2), actual);
     }

@@ -1,5 +1,6 @@
 package com.bobocode;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -66,9 +67,9 @@ public class LinkedList<E> implements List<E> {
         if (index == size) {
             add(element);
         } else {
-            Objects.checkIndex(index, size);
-            Node<E> currentNode = nodeByIndex(index - 1);
-            currentNode.next = newNode;
+            Node<E> previousNode = nodeByIndex(index - 1);
+            newNode.next = previousNode.next;
+            previousNode.next = newNode;
             size++;
         }
     }
@@ -104,6 +105,9 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public E get(int index) {
+        if (head == null) {
+            throw new IndexOutOfBoundsException();
+        }
         return nodeByIndex(index).element;
     }
 
@@ -116,7 +120,7 @@ public class LinkedList<E> implements List<E> {
     @Override
     public E getFirst() {
         if (head == null) {
-            return null;
+            throw new NoSuchElementException();
         }
         return head.element;
     }
@@ -130,7 +134,7 @@ public class LinkedList<E> implements List<E> {
     @Override
     public E getLast() {
         if (tail == null) {
-            return null;
+            throw new NoSuchElementException();
         }
         return tail.element;
     }
@@ -144,8 +148,15 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public void remove(int index) {
+        if (head == null) {
+            throw new IndexOutOfBoundsException();
+        }
         if (index == 0) {
             head = head.next;
+        } else if (index == size - 1) {
+            Node<E> previousElement = nodeByIndex(index - 1);
+            previousElement.next = null;
+            tail = previousElement;
         } else {
             Node<E> previousElement = nodeByIndex(index - 1);
             Node<E> currentElement = previousElement.next;
