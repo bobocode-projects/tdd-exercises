@@ -13,12 +13,11 @@
         <module>binary-search-tree</module>
         <module>stack</module>
         <module>linked-list</module>
-        <module>avl-tree</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>1.10</maven.compiler.source>
-        <maven.compiler.target>1.10</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencies>
