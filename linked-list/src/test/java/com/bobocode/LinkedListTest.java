@@ -1,14 +1,11 @@
 package com.bobocode;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
-@RunWith(JUnit4.class)
 public class LinkedListTest {
 
     private List<Integer> intList = new LinkedList<>();

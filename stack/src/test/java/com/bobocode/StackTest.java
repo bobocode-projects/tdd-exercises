@@ -1,16 +1,13 @@
 package com.bobocode;
 
+import org.junit.jupiter.api.Test;
 import com.bobocode.exception.EmptyStackException;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(JUnit4.class)
 public class StackTest {
 
     private Stack<Integer> intStack = new NodeStack<>();
