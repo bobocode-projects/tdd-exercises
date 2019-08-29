@@ -1,10 +1,15 @@
 package com.bobocode;
 
+
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class LinkedListTest {
 
@@ -60,14 +65,14 @@ public class LinkedListTest {
         assertEquals(42, intList.getLast().intValue());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void testGetFirstOfEmptyList() {
-        intList.getFirst();
+        assertThrows(NoSuchElementException.class, () -> intList.getFirst());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void testGetLastOfEmptyList() {
-        intList.getLast();
+        assertThrows(NoSuchElementException.class, () -> intList.getLast());
     }
 
     @Test
@@ -79,23 +84,23 @@ public class LinkedListTest {
         assertEquals(52, intList.get(2).intValue());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testGetElementByIndexOfEmptyTree() {
-        intList.get(1);
+        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(1));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testGetElementByNegativeIndex() {
         intList = LinkedList.of(1, 2, 3);
 
-        intList.get(-2);
+        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(-2));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testGetElementBySizeIndex() {
         intList = LinkedList.of(1, 2, 3);
 
-        intList.get(3);
+        assertThrows(IndexOutOfBoundsException.class, () -> intList.get(3));
     }
 
     @Test
@@ -153,11 +158,11 @@ public class LinkedListTest {
         assertEquals(3, intList.size());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testSetElementByInvalidIndex() {
         intList = LinkedList.of(110, 111);
 
-        intList.set(3, 114);
+        assertThrows(IndexOutOfBoundsException.class, () -> intList.set(3, 114));
     }
 
     @Test
@@ -207,9 +212,9 @@ public class LinkedListTest {
         assertEquals(0, intList.size());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void testRemoveElementOfEmptyList() {
-        intList.remove(0);
+        assertThrows(IndexOutOfBoundsException.class, () -> intList.remove(0));
     }
 
     @Test
