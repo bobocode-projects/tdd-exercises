@@ -10,19 +10,19 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
 
-public class BinarySearchTreeTest {
+class BinarySearchTreeTest {
 
     private BinarySearchTree<Integer> bst = new RecursiveBinarySearchTree<>();
 
     @Test
-    public void testInsertIntoEmptyTree() {
+    void testInsertIntoEmptyTree() {
         boolean inserted = bst.insert(123);
 
         assertThat(inserted, is(true));
     }
 
     @Test
-    public void testInsertTwoElementsWithSameValue() {
+    void testInsertTwoElementsWithSameValue() {
         bst = RecursiveBinarySearchTree.of(25);
 
         boolean inserted = bst.insert(25);
@@ -31,7 +31,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testInsertElements() {
+    void testInsertElements() {
         bst = RecursiveBinarySearchTree.of(10, 9, 11, 8, 12, 7);
 
         assertThat(bst.search(10), is(true));
@@ -44,7 +44,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testSearchRootElement() {
+    void testSearchRootElement() {
         bst = RecursiveBinarySearchTree.of(44);
 
         boolean foundExistingElement = bst.search(44);
@@ -55,14 +55,14 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testSearchInEmptyTree() {
+    void testSearchInEmptyTree() {
         boolean found = bst.search(55);
 
         assertThat(found, is(false));
     }
 
     @Test
-    public void testSearchElements() {
+    void testSearchElements() {
         bst = RecursiveBinarySearchTree.of(234, 54, 12, 544, 21, 10);
 
         assertThat(bst.search(234), is(true));
@@ -75,14 +75,14 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testSizeOfEmptyTree() {
+    void testSizeOfEmptyTree() {
         int actualTreeSize = bst.size();
 
         assertThat(actualTreeSize, is(0));
     }
 
     @Test
-    public void testSize() {
+    void testSize() {
         bst = RecursiveBinarySearchTree.of(1, 2, 3, 4, 1);
 
         int actualTreeSize = bst.size();
@@ -91,14 +91,14 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testHeightOfEmptyTree() {
+    void testHeightOfEmptyTree() {
         int actualHeight = bst.height();
 
         assertThat(actualHeight, is(0));
     }
 
     @Test
-    public void testHeightOfOneElementTree() {
+    void testHeightOfOneElementTree() {
         bst = RecursiveBinarySearchTree.of(24);
 
         int actualHeight = bst.height();
@@ -114,7 +114,7 @@ public class BinarySearchTreeTest {
      * ...1       20
      */
     @Test
-    public void testHeight() {
+    void testHeight() {
         bst = RecursiveBinarySearchTree.of(10, 5, 15, 1, 20);
 
         int actualHeight = bst.height();
@@ -134,7 +134,7 @@ public class BinarySearchTreeTest {
      * ..........5
      */
     @Test
-    public void testHeightOfLikedListTree() {
+    void testHeightOfLikedListTree() {
         bst = RecursiveBinarySearchTree.of(1, 2, 3, 4, 5);
 
         int actualHeight = bst.height();
@@ -143,7 +143,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testHeightOfSingleElementTree() {
+    void testHeightOfSingleElementTree() {
         bst = RecursiveBinarySearchTree.of(1);
 
         int actualHeight = bst.height();
@@ -152,7 +152,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testInorderTraversalOfEmptyTree() {
+    void testInorderTraversalOfEmptyTree() {
         List<Integer> treeElementsList = new ArrayList<>(bst.size());
         bst.inOrderTraversal(treeElementsList::add);
 
@@ -160,7 +160,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void testInorderTraversal() {
+    void testInorderTraversal() {
         bst = RecursiveBinarySearchTree.of(324, 23, 14, 1551, 2);
 
         List<Integer> treeElementsList = new ArrayList<>(bst.size());

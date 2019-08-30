@@ -7,22 +7,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class StackTest {
+class StackTest {
 
     private Stack<Integer> intStack = new NodeStack<>();
 
     @Test
-    public void testPushElementOntoEmptyStack() {
+    void testPushElementOntoEmptyStack() {
         intStack.push(234);
     }
 
     @Test
-    public void testPopElementFromEmptyStack() {
+    void testPopElementFromEmptyStack() {
         assertThrows(EmptyStackException.class, () -> intStack.pop());
     }
 
     @Test
-    public void testPushElements() {
+    void testPushElements() {
         intStack = NodeStack.of(23, 35, 72);
 
         intStack.push(55);
@@ -31,7 +31,7 @@ public class StackTest {
     }
 
     @Test
-    public void testPopElements() {
+    void testPopElements() {
         intStack = NodeStack.of(87, 53, 66);
 
         intStack.pop();
@@ -42,7 +42,7 @@ public class StackTest {
     }
 
     @Test
-    public void testSize(){
+    void testSize(){
         intStack = NodeStack.of(87, 53, 66);
 
         int actualSize = intStack.size();
@@ -51,14 +51,14 @@ public class StackTest {
     }
 
     @Test
-    public void testSizeOnEmptyStack(){
+    void testSizeOnEmptyStack(){
         int actualSize = intStack.size();
 
         assertThat(actualSize, is(0));
     }
 
     @Test
-    public void testIsEmpty(){
+    void testIsEmpty(){
         intStack = NodeStack.of(87, 53, 66);
 
         boolean stackEmpty = intStack.isEmpty();
@@ -67,7 +67,7 @@ public class StackTest {
     }
 
     @Test
-    public void testIsEmptyOnEmptyStack(){
+    void testIsEmptyOnEmptyStack(){
         boolean stackEmpty = intStack.isEmpty();
 
         assertThat(stackEmpty, is(true));
