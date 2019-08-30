@@ -1,18 +1,15 @@
 package com.bobocode.bst;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.empty;
-import static org.junit.Assert.assertThat;
 
-@RunWith(JUnit4.class)
 public class BinarySearchTreeTest {
 
     private BinarySearchTree<Integer> bst = new RecursiveBinarySearchTree<>();

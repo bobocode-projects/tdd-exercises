@@ -1,16 +1,12 @@
 package com.bobocode;
 
 import com.bobocode.exception.EmptyStackException;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@RunWith(JUnit4.class)
 public class StackTest {
 
     private Stack<Integer> intStack = new NodeStack<>();
@@ -20,9 +16,9 @@ public class StackTest {
         intStack.push(234);
     }
 
-    @Test(expected = EmptyStackException.class)
+    @Test
     public void testPopElementFromEmptyStack() {
-        intStack.pop();
+        assertThrows(EmptyStackException.class, () -> intStack.pop());
     }
 
     @Test
