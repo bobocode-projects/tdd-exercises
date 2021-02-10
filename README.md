@@ -1,3 +1,4 @@
+# This repo is DEPRECATED. Please use [java-fundamentals-course](https://github.com/bobocode-projects/java-fundamentals-course)
 # <img src="https://raw.githubusercontent.com/bobocode-projects/resources/master/image/logo_transparent_background.png" height=50/>TDD exercises
 The list of exercises dedicated to training your Test-driven development (TDD) skills 
 
